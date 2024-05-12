@@ -35,6 +35,9 @@ class _LoginPageState extends State<LoginPage> {
               height: 10,
             ),
             TextFormField(
+              decoration: const InputDecoration(
+                label: Text('Input password'),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter password';
@@ -44,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             Center(
               child: ElevatedButton(
@@ -56,7 +59,18 @@ class _LoginPageState extends State<LoginPage> {
                   }
                   context.go(home);
                 },
-                child: const Text('Submit'),
+                child: const Text('Sign in'),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  context.go(registration);
+                },
+                child: const Text('Sign up'),
               ),
             ),
           ],

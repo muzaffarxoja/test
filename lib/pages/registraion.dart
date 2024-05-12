@@ -25,6 +25,9 @@ class _MyFormState extends State<MyForm> {
         child: Column(
           children: [
             TextFormField(
+              decoration: const InputDecoration(
+                label: Text('Input user name'),
+              ),
               controller: userName,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -41,6 +44,9 @@ class _MyFormState extends State<MyForm> {
               height: 10,
             ),
             TextFormField(
+              decoration: const InputDecoration(
+                label: Text('Input password'),
+              ),
               controller: passWord,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -53,6 +59,9 @@ class _MyFormState extends State<MyForm> {
               height: 10,
             ),
             TextFormField(
+              decoration: const InputDecoration(
+                label: Text('Retype password'),
+              ),
               controller: passWordConfirm,
               validator: (value) {
                 if (value == null || value.isEmpty) {
