@@ -1,18 +1,22 @@
-class Expense {
-  Expense({
-    required this.title,
-    required this.amount,
-    required this.date,
-    required this.category,
-  }) : id = uuid.v4();
+ class UserPassword {
+  UserPassword({
+    required this.user,
+    required this.passWord,
+    
+  }) 
 
-  final String id;
-  final String title;
-  final double amount;
-  final DateTime date;
-  final Category category;
-
-  String get formattedDate {
-    return formatter.format(date);
+  final String user;
+  final String passWord;
   }
-}
+
+final List<UserPassword> userdata = [
+    UserPassword(
+      user: 'jack',
+      passWord: '1234',
+    ),
+    UserPassword(
+      user: 'sam',
+      passWord: '2345',
+    ),
+  ];
+  

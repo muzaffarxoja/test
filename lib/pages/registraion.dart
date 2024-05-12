@@ -12,10 +12,34 @@ class MyForm extends StatefulWidget {
 
 class _MyFormState extends State<MyForm> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController userName = TextEditingController();
-  final TextEditingController passWord = TextEditingController();
-  final TextEditingController passWordConfirm = TextEditingController();
-  bool userExists = false;
+  final TextEditingController userNameInput = TextEditingController();
+  final TextEditingController passWordInput = TextEditingController();
+  final TextEditingController passWordConfirmInput = TextEditingController();
+  
+
+  bool userExists(String name) {
+  for (var userPassword in userdata) {
+    if (userPassword.user == name) {
+      return true; // Username exists in the list
+    }
+  }
+  return false; // Username doesn't exist in the list
+}
+
+  }
+
+  bool save(String name, String passWord) {
+      // Create a new instance of UserPassword
+    UserPassword newUserPassword = UserPassword(
+      user: name,
+      passWord: passWord,
+      );
+
+// Add the new instance to the userdata list
+      userdata.add(newUserPassword);
+      
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +52,13 @@ class _MyFormState extends State<MyForm> {
               decoration: const InputDecoration(
                 label: Text('Input user name'),
               ),
-              controller: userName,
+              controller: userNameInput,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter user name';
                 }
 
-                if (userExists) {
+                if (userExists(userNameInput.Text)) {
                   return 'User with such name exists';
                 }
                 return null;
@@ -47,7 +71,7 @@ class _MyFormState extends State<MyForm> {
               decoration: const InputDecoration(
                 label: Text('Input password'),
               ),
-              controller: passWord,
+              controller: passWordInput,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter password';
@@ -67,7 +91,7 @@ class _MyFormState extends State<MyForm> {
                 if (value == null || value.isEmpty) {
                   return 'Please enter password';
                 }
-                if (passWord != passWordConfirm) {
+                if (passWordInput.Text != passWordConfirmInput.Text) {
                   return 'Please enter same password';
                 }
                 return null;
@@ -83,7 +107,16 @@ class _MyFormState extends State<MyForm> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Processing Data')),
                     );
-
+                    if (save(userNameInput.Text, passWordInput.Text)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Succesfully saved')),
+                    );
+                    }
+                    else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Somethink went wrong')),
+                    );
+                    }
                     context.go(authorization);
                   }
                 },
